@@ -6,10 +6,10 @@ import java.util.Date;
 
 @Data
 public class Question {
-    private Integer id;
+    private int id;
     private String title;
-    private String context;
-    private Integer userId;
+    private String content;
+    private int userId;
     private Date createdDate;
     private Integer commentCount;
 }

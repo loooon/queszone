@@ -7,6 +7,7 @@ import com.xp.queszone.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -23,9 +24,21 @@ public class HomeController {
     UserService userService;
 
     @RequestMapping(path = {"/","/index"},method = RequestMethod.GET)
-    public String home(Model model) {
+    public String index(Model model) {
+        List<ViewObject> viewObjects = generateViewObjects(0,0,10);
+        model.addAttribute("vos",viewObjects);
+        return "index";
+    }
 
-        List<Question> questions = questionService.getLatestQuestions(0,0,5);
+    @RequestMapping(path = {"/user/{userId}"},method = RequestMethod.GET)
+    public String userIndex(Model model,@PathVariable("userId") int userId) {
+        List<ViewObject> viewObjects = generateViewObjects(userId,0,10);
+        model.addAttribute("vos",viewObjects);
+        return "index";
+    }
+
+    private List<ViewObject> generateViewObjects(int userId, int offset, int limit) {
+        List<Question> questions = questionService.getLatestQuestions(userId, offset, limit);
         List<ViewObject> viewObjects = new ArrayList<>();
         for (Question question: questions) {
             ViewObject viewObject = new ViewObject();
@@ -33,7 +46,6 @@ public class HomeController {
             viewObject.set("user",userService.getUser(question.getUserId()));
             viewObjects.add(viewObject);
         }
-        model.addAttribute("vos",viewObjects);
-        return "index";
+        return viewObjects;
     }
 }

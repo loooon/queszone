@@ -17,7 +17,6 @@ public interface QuestionDao {
     @Insert({"INSERT INTO",TABLE_NAME,INSERT_FIELDS,"VALUES(#{title},#{content},#{userId},#{createdDate},#{commentCount})"})
     int addQuestion(Question question);
 
-
     List<Question> selectLatestQuestions(@Param("userId") int userId,
                                          @Param("offset") int offset,
                                          @Param("limit") int limit);

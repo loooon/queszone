@@ -1,5 +1,6 @@
 package com.xp.queszone.controller;
 
+import com.xp.queszone.model.HostHolder;
 import com.xp.queszone.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -16,22 +17,24 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 
 @Controller
-public class LoginController {
+public class RegisterController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
     UserService userService;
 
-    @RequestMapping(path = {"/login"},method = {RequestMethod.POST})
-    public String login(Model model,
-                        @RequestParam("username") String username,
-                        @RequestParam("password") String password,
-                        @RequestParam(value = "next",required = false) String next,
-                        @RequestParam(value = "rememberme",defaultValue = "false") boolean rememberme,
-                        HttpServletResponse response) {
+    @Autowired
+    HostHolder hostHolder;
+
+    @RequestMapping(path = {"/reg"}, method = {RequestMethod.POST})
+    public String register(Model model,
+                           @RequestParam("username") String username,
+                           @RequestParam("password") String password,
+                           @RequestParam(value = "next",required = false) String next,
+                           HttpServletResponse response){
         try {
-            Map<String, String> map = userService.login(username,password);
+            Map<String, String> map = userService.register(username,password);
             if (map.containsKey("ticket")) {
                 Cookie cookie = new Cookie("ticket",map.get("ticket"));
                 cookie.setPath("/");
@@ -44,16 +47,10 @@ public class LoginController {
                 model.addAttribute("msg",map.get("msg"));
                 return "login";
             }
+
         }catch (Exception e) {
-            logger.error("登录异常"+e.getMessage());
+            logger.error("注册异常"+e.getMessage());
             return "login";
         }
-    }
-
-    @RequestMapping(path = "/reglogin", method = RequestMethod.GET)
-    public String reglogin(Model model,
-                           @RequestParam(value = "next",required = false) String next) {
-        model.addAttribute("next",next);
-        return "login";
     }
 }

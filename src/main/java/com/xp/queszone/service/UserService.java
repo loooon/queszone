@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.xml.soap.SAAJResult;
 import java.util.*;
 
 @Service
@@ -92,7 +91,7 @@ public class UserService {
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(userId);
         Date now = new Date();
-        now.setTime(now.getTime()+100*24*60*60*1000); //设置loginTicket有效期 100 天
+        now.setTime(now.getTime()+(long)100*24*60*60*1000); //设置loginTicket有效期 100 天
         loginTicket.setExpired(now);
         loginTicket.setStatus(0); //默认有效，若用户手动登出则改为1
         loginTicket.setTicket(UUID.randomUUID().toString().replaceAll("-",""));

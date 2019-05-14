@@ -1,10 +1,7 @@
 package com.xp.queszone.dao;
 
 import com.xp.queszone.model.Question;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.List;
 
@@ -19,6 +16,9 @@ public interface QuestionDao {
 
     @Select({"SELECT",SELECT_FIELDS,"FROM",TABLE_NAME,"WHERE id = #{id}"})
     Question selectById(int id);
+
+    @Update({"UPDATE", TABLE_NAME, "SET comment_count = #{commentCount} WHERE id=#{id}"})
+    int updateCommentCount(@Param("id") int id, @Param("commentCount") int commentCount);
 
     List<Question> selectLatestQuestions(@Param("userId") int userId,
                                          @Param("offset") int offset,

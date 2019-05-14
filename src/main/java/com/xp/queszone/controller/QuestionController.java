@@ -1,7 +1,7 @@
 package com.xp.queszone.controller;
 
-import com.xp.queszone.model.HostHolder;
-import com.xp.queszone.model.Question;
+import com.xp.queszone.model.*;
+import com.xp.queszone.service.CommentService;
 import com.xp.queszone.service.QuestionService;
 import com.xp.queszone.service.UserService;
 import com.xp.queszone.util.QuesZoneUtil;
@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 public class QuestionController {
@@ -26,6 +28,9 @@ public class QuestionController {
 
     @Autowired
     HostHolder hostHolder;
+
+    @Autowired
+    CommentService commentService;
 
     @RequestMapping(value = "/question/add", method = RequestMethod.POST)
     @ResponseBody
@@ -56,7 +61,16 @@ public class QuestionController {
                                  @PathVariable("qid") int qid) {
         Question question = questionService.selectById(qid);
         model.addAttribute("question",question);
-        model.addAttribute("user",userService.getUser(question.getUserId()));
+
+        List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
+        List<ViewObject> comments = new ArrayList<>();
+        for (Comment comment : commentList) {
+            ViewObject vo = new ViewObject();
+            vo.set("user", userService.getUser(comment.getUserId()));
+            vo.set("comment", comment);
+            comments.add(vo);
+        }
+        model.addAttribute("comments",comments);
         return "detail";
     }
 }

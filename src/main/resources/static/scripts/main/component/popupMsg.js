@@ -130,5 +130,4 @@ var oPopupAdd = new PopupAdd({
             that.contentIpt.val($.trim(oData.content));
         }
     }
-
 })(window);

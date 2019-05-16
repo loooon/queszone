@@ -100,7 +100,6 @@ public class SensitiveService implements InitializingBean {
         }
     }
 
-
     //敏感词检测前缀树
     private class TrieNode {
         //是不是关键词的结尾

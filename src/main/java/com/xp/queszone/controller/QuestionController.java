@@ -2,6 +2,7 @@ package com.xp.queszone.controller;
 
 import com.xp.queszone.model.*;
 import com.xp.queszone.service.CommentService;
+import com.xp.queszone.service.LikeService;
 import com.xp.queszone.service.QuestionService;
 import com.xp.queszone.service.UserService;
 import com.xp.queszone.util.QuesZoneUtil;
@@ -31,6 +32,9 @@ public class QuestionController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    LikeService likeService;
 
     @RequestMapping(value = "/question/add", method = RequestMethod.POST)
     @ResponseBody
@@ -68,6 +72,12 @@ public class QuestionController {
             ViewObject vo = new ViewObject();
             vo.set("user", userService.getUser(comment.getUserId()));
             vo.set("comment", comment);
+            if (null == hostHolder.getUser()) {
+                vo.set("liked", 0);
+            } else {
+                vo.set("liked", likeService.getLikeStatus(hostHolder.getUser().getId(), EntityType.ENTITY_COMMENT, comment.getId()));
+            }
+            vo.set("likeCount", likeService.getLikeCount(EntityType.ENTITY_COMMENT, comment.getId()));
             comments.add(vo);
         }
         model.addAttribute("comments",comments);

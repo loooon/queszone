@@ -11,6 +11,7 @@ public class QuesZoneUtil {
     private static final Logger logger = LoggerFactory.getLogger(QuesZoneUtil.class);
 
     public static int ANONYMOUS_USERID = 3;
+    public static int SYSTEM = 4;
 
     public static String MD5(String key) {
         char hexDigits[] = {

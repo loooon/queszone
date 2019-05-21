@@ -1,6 +1,5 @@
 package com.xp.queszone.dao;
 
-import com.xp.queszone.model.Comment;
 import com.xp.queszone.model.Message;
 import com.xp.queszone.model.MessageSummary;
 import org.apache.ibatis.annotations.*;
@@ -25,7 +24,7 @@ public interface MessageDao {
 
     @Select({"SELECT m1.*, m2.cnt FROM message m1 INNER JOIN " +
             "(SELECT MAX(id) AS id,COUNT(id) AS cnt FROM message GROUP BY conversation_id) m2 " +
-            "ON m1.id = m2.id AND m1.to_id = #{userId} OR m1.from_id = #{userId} ORDER BY created_date DESC LIMIT #{offset},#{limit}"})
+            "ON m1.id = m2.id AND m1.to_id = #{userId} ORDER BY created_date DESC LIMIT #{offset},#{limit}"})
     List<MessageSummary> getConversationList(@Param("userId") int userId,
                                              @Param("offset") int offset,
                                              @Param("limit") int limit);

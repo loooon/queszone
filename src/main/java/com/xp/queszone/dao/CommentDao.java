@@ -22,4 +22,10 @@ public interface CommentDao {
 
     @Update({"UPDATE comment SET status = #{status} WHERE id = #{id}"})
     int updateStatus(@Param("id") int id, @Param("status") int status);
+
+    @Select({"SELECT",SELECT_FIELDS,"FROM",TABLE_NAME,"WHERE id = #{id}"})
+    Comment getCommentById(int id);
+
+    @Select({"SELECT COUNT(id) FROM",TABLE_NAME,"WHERE user_id = #{userId}"})
+    int getUserCommentCount(int userId);
 }

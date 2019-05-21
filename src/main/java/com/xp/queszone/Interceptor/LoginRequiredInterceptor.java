@@ -19,8 +19,9 @@ public class LoginRequiredInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         if (null == hostHolder.getUser()) {
             response.sendRedirect("/reglogin?next="+request.getRequestURI());
+            return false;
         }
-        return false;
+        return true;
     }
 
     @Override

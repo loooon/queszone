@@ -1,4 +1,6 @@
 #parse("header.html")
+<link rel="stylesheet" href="../styles/index.css">
+<link rel="stylesheet" href="../styles/detail.css">
 <div class="zg-wrap zu-main clearfix " role="main">
     <div class="zu-main-content">
         <div class="zu-main-content-inner">
@@ -33,7 +35,7 @@
                                     </div>
                                     <div class="expandable entry-body">
                                         <div class="zm-item-vote">
-                                            <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">4168</a></div>
+                                            <a class="zm-item-vote-count js-expand js-vote-count" href="javascript:;" data-bind-votecount="">${vo.followCount}</a></div>
                                         <div class="zm-item-answer-author-info">
                                             <a class="author-link" data-tip="p$b$amuro1230" target="_blank" href="/user/$!{vo.user.id}">$!{vo.user.name}</a>
                                             &nbsp;&nbsp;&nbsp;&nbsp;发布时间:$date.format('yyyy-MM-dd HH:mm:ss', $!{vo.question.createdDate})</div>
@@ -42,7 +44,7 @@
                                                     <a href="#" class="more text">
                                                         <span class="js-voteCount">4168</span>&nbsp;人赞同</a></span>
                                         </div>
-                                        <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="李淼" data-entry-url="/question/19857995/answer/13174385">
+                                        <div class="zm-item-rich-text expandable js-collapse-body" data-resourceid="123114" data-action="/answer/content" data-author-name="" data-entry-url="/question/19857995/answer/13174385">
                                             <div class="zh-summary summary clearfix">${vo.question.content}</div>
                                         </div>
                                     </div>
@@ -53,7 +55,6 @@
                                                     <i class="z-icon-follow"></i>关注问题</a>
                                                 <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                                     <i class="z-icon-comment"></i>${vo.question.commentCount} 条评论</a>
-
 
                                                 <button class="meta-item item-collapse js-collapse">
                                                     <i class="z-icon-fold"></i>收起</button>
@@ -71,4 +72,6 @@
         </div>
     </div>
 </div>
+#parse("js.html")
+<script type="text/javascript" src="/scripts/main/site/detail.js"></script>
 #parse("footer.html")

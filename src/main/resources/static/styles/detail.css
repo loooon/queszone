@@ -219,7 +219,7 @@ html.in-app body.zhi {
     padding-top:0
 }
 a {
-    color:#25bb9b
+    color:#1a1a1a
 }
 a:active {
     outline:0
@@ -1582,7 +1582,8 @@ html.no-touchevents .meta-item:hover .z-icon-comment {
     display:block;
     font-size:13px;
     margin:20px 0;
-    padding:5px 1px
+    padding:5px 1px;
+    background:#0084ff
 }
 .zu-button-more.loading {
     cursor:not-allowed
@@ -1593,10 +1594,10 @@ html.no-touchevents .meta-item:hover .z-icon-comment {
 .zg-btn-blue {
     color:#fff!important;
     /*text-shadow:0 -1px 0 rgba(0,0,0,.5);*/
-    background:#25bb9b;
-    background:-webkit-linear-gradient(top,#25bb9b,#00B091);
-    background:linear-gradient(to bottom,#25bb9b,#00B091);
-    border:1px solid #25bb9b;
+    background:#0084ff;
+    background:-webkit-linear-gradient(top,#0084ff,#0084ff);
+    background:linear-gradient(to bottom,#0084ff,#0084ff);
+    border:1px solid #0084ff;
     box-shadow:0 1px 0 rgba(255,255,255,.2) inset,0 1px 0 rgba(0,0,0,.2)
 }
 .zg-btn-blue:active {
@@ -1626,10 +1627,10 @@ html.no-touchevents .meta-item:hover .z-icon-comment {
     min-width: 78px;
     color: #fff!important;
     text-shadow: 0 1px 0 rgba(255,255,255,.3);
-    background: #25bb9b;
-    background: -webkit-linear-gradient(top,#25bb9b,#00B091);
-    background: linear-gradient(to bottom,#25bb9b,#00B091);
-    border: 1px solid #25bb9b;
+    background: #0084ff;
+    background: -webkit-linear-gradient(top,#0084ff,#0084ff);
+    background: linear-gradient(to bottom,#0084ff,#0084ff);
+    border: 1px solid #0084ff;
     box-shadow: 0 1px 0 rgba(255,255,255,.5) inset,0 1px 0 rgba(0,0,0,.2);
 }
 .zg-btn-green:active,.zg-btn-follow:active {
@@ -7243,9 +7244,9 @@ html.modal-open.flexbox .modal-wrapper .modal-dialog.centered {
     margin:-1px -1px 0;
     padding:10px 15px;
     line-height:14px;
-    background:#25bb9b;
-    background:-webkit-linear-gradient(top,#25bb9b,#00B091);
-    background:linear-gradient(to bottom,#25bb9b,#00B091);
+    background:#0084ff;
+    background:-webkit-linear-gradient(top,#0084ff,#0084ff);
+    background:linear-gradient(to bottom,#0084ff,#0084ff);
     border:1px solid #00B091;
     border-radius:6px 6px 0 0;
     box-shadow:0 1px 0 rgba(255,255,255,.1) inset,0 1px 1px rgba(0,0,0,.2)
@@ -7855,7 +7856,7 @@ a>.invisible {
     float:left;
     width:61px;
     height:100%;
-    background-image:url(../images/res/nk.png);
+    /*background-image:url(../images/res/nk.png);*/
     background-repeat:no-repeat;
     background-position:center;
     text-indent:-9999px;
@@ -7894,9 +7895,9 @@ a>.invisible {
     right: 0;
     width: 40px;
     height: 100%;
-    background: #00BC9B;
-    background: -webkit-linear-gradient(top,#00BC9B,#00BC9B);
-    background: linear-gradient(to bottom,#00BC9B,#00BC9B);
+    background: #0084ff;
+    background: -webkit-linear-gradient(top,#0084ff,#0084ff);
+    background: linear-gradient(to bottom,#0084ff,#0084ff);
     border: 1px solid #3d444c;
     border-top-right-radius: 4px;
     border-bottom-right-radius: 4px;
@@ -7949,9 +7950,9 @@ a>.invisible {
     height: 32px;
     line-height: 30px;
     margin-top: 7px;
-    border: 1px solid #00B091;
+    border: 1px solid #0084ff;
     border-radius: 4px;
-    background: #00BC9B;
+    background: #0084ff;
     box-shadow: 0 1px 2px rgba(0,0,0,.05),inset 0 1px 1px rgba(255,255,255,.15);
     color: #fff;
     font-size: 14px;

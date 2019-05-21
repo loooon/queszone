@@ -1,5 +1,6 @@
 package com.xp.queszone.controller;
 
+import com.xp.queszone.async.EventProducer;
 import com.xp.queszone.service.UserService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -39,6 +40,7 @@ public class LoginController {
                 if (StringUtils.isNotBlank(next)) {
                     return "redirect:"+next;
                 }
+
                 return "redirect:/";
             } else {
                 model.addAttribute("msg",map.get("msg"));

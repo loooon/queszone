@@ -10,6 +10,8 @@ public class RedisKeyGenerator {
     //关注对象
     private static String FOLLOWEE = "FOLLOWEE";
 
+    private static String TIMELINE = "TIMELINE";
+
 
     public static String getLikeKey(int entityType, int entityId) {
         return LIKE + SPLIT + String.valueOf(entityType) + String.valueOf(entityId);
@@ -31,5 +33,9 @@ public class RedisKeyGenerator {
     //用户关注的某类实体列表
     public static String getFolloweeKey(int userId, int entityType) {
         return FOLLOWEE + SPLIT + String.valueOf(userId) + String.valueOf(entityType);
+    }
+
+    public static String getTimelineKey(int userId) {
+        return TIMELINE + SPLIT + String.valueOf(userId);
     }
 }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 @Data
 public class EventModel {
+
     private EventType eventType;
     private int actorId;
     private int entityType;

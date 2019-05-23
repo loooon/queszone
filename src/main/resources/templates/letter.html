@@ -21,17 +21,31 @@
                 </div>
                 </div>
                 <div class="chat-headbox">
-                <span class="msg-num">
-                $conversation.unread
-                </span>
+                    #if($conversation.unread > 0)
+                    <span class="msg-num">
+                        $conversation.unread
+                    </span>
+                    #end
+
                 <a class="list-head">
-                <img alt="头像" src="$conversation.user.headUrl">
+                    #if(!$conversation.user)
+                    <img alt="头像" src="../images/img/system.png">
+                    #else
+                    <img alt="头像" src="$conversation.user.headUrl">
+                    #end
                 </a>
+
                 </div>
                 <div class="letter-detail">
-                <a title="$conversation.user.name" class="letter-name level-color-1">
-                    $conversation.user.name
-                </a>
+                    #if(!$conversation.user)
+                    <a title="系统通知" class="letter-name level-color-1">
+                        系统通知
+                    </a>
+                    #else
+                    <a title="$conversation.user.name" class="letter-name level-color-1">
+                        $conversation.user.name
+                    </a>
+                    #end
                 <p class="letter-brief">
                 <a href="/msg/detail?conversationId=$conversation.conversation.conversationId">
                 $conversation.conversation.content

@@ -1,5 +1,8 @@
 package com.xp.queszone.controller;
 
+import com.xp.queszone.async.EventModel;
+import com.xp.queszone.async.EventProducer;
+import com.xp.queszone.async.EventType;
 import com.xp.queszone.model.Comment;
 import com.xp.queszone.model.EntityType;
 import com.xp.queszone.model.HostHolder;
@@ -24,6 +27,9 @@ public class CommentController {
     QuestionService questionService;
 
     @Autowired
+    EventProducer eventProducer;
+
+    @Autowired
     CommentService commentService;
 
     @RequestMapping(path = {"/addComment"}, method = RequestMethod.POST)
@@ -44,6 +50,11 @@ public class CommentController {
         commentService.addComment(comment);
         int count = commentService.getCommentCount(comment.getEntityId(), comment.getEntityType());
         questionService.updateCommentCount(comment.getEntityId(), count);
+        EventModel eventModel = new EventModel();
+        eventModel.setEventType(EventType.COMMENT)
+        .setEntityId(questionId)
+        .setActorId(comment.getUserId());
+        eventProducer.fireEvent(eventModel);
         return "redirect:/question/"+questionId;
     }
 }

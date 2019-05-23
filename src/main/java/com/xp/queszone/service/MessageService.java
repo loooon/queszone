@@ -34,4 +34,8 @@ public class MessageService {
     public int getConvesationUnreadCount(int userId, String conversationId) {
         return messageDao.getConvesationUnreadCount(userId, conversationId);
     }
+
+    public int updateMessageStatus(String conversationId) {
+        return messageDao.updateMessageStatus(conversationId);
+    }
 }

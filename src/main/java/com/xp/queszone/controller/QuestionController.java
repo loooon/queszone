@@ -1,10 +1,7 @@
 package com.xp.queszone.controller;
 
 import com.xp.queszone.model.*;
-import com.xp.queszone.service.CommentService;
-import com.xp.queszone.service.LikeService;
-import com.xp.queszone.service.QuestionService;
-import com.xp.queszone.service.UserService;
+import com.xp.queszone.service.*;
 import com.xp.queszone.util.QuesZoneUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +16,7 @@ import java.util.List;
 
 @Controller
 public class QuestionController {
+
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);
 
     @Autowired
@@ -32,6 +30,9 @@ public class QuestionController {
 
     @Autowired
     CommentService commentService;
+
+    @Autowired
+    FollowService followService;
 
     @Autowired
     LikeService likeService;
@@ -61,12 +62,12 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/question/{qid}")
-    public String questionDetail(Model model,
-                                 @PathVariable("qid") int qid) {
+    public String questionDetail(Model model, @PathVariable("qid") int qid) {
         Question question = questionService.selectById(qid);
         model.addAttribute("question",question);
 
         List<Comment> commentList = commentService.getCommentsByEntity(qid, EntityType.ENTITY_QUESTION);
+
         List<ViewObject> comments = new ArrayList<>();
         for (Comment comment : commentList) {
             ViewObject vo = new ViewObject();
@@ -81,6 +82,27 @@ public class QuestionController {
             comments.add(vo);
         }
         model.addAttribute("comments",comments);
+
+        List<ViewObject> followUsers = new ArrayList<ViewObject>();
+        // 获取关注的用户信息
+        List<Integer> users = followService.getFollowers(EntityType.ENTITY_QUESTION, qid, 20);
+        for (Integer userId : users) {
+            ViewObject vo = new ViewObject();
+            User u = userService.getUser(userId);
+            if (u == null) {
+                continue;
+            }
+            vo.set("name", u.getName());
+            vo.set("headUrl", u.getHeadUrl());
+            vo.set("id", u.getId());
+            followUsers.add(vo);
+        }
+        model.addAttribute("followUsers", followUsers);
+        if (hostHolder.getUser() != null) {
+            model.addAttribute("followed", followService.isFollower(hostHolder.getUser().getId(), EntityType.ENTITY_QUESTION, qid));
+        } else {
+            model.addAttribute("followed", false);
+        }
         return "detail";
     }
 }

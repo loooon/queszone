@@ -68,7 +68,7 @@ public class FollowController {
         return QuesZoneUtil.getJSONString(ret ? 0 : 1, String.valueOf(followService.getFolloweeCount(hostHolder.getUser().getId(), EntityType.ENTITY_USER)));
     }
 
-    @RequestMapping(path = {"/followQuestion"}, method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(path = {"/followQuestion"}, method = {RequestMethod.POST})
     @ResponseBody
     public String followQuestion(@RequestParam("questionId") int questionId) {
         if (null == hostHolder.getUser()) {
@@ -80,15 +80,23 @@ public class FollowController {
         }
         boolean ret = followService.follow(hostHolder.getUser().getId(), EntityType.ENTITY_QUESTION, questionId);
 
+        EventModel eventModel = new EventModel();
+        eventModel.setEventType(EventType.FOLLOW)
+                .setActorId(hostHolder.getUser().getId())
+                .setEntityId(questionId)
+                .setEntityType(EntityType.ENTITY_QUESTION)
+                .setEntityOwnerId(question.getUserId());
+        eventProducer.fireEvent(eventModel);
+
         Map<String, Object> info = new HashMap<>();
         info.put("headUrl", hostHolder.getUser().getHeadUrl());
         info.put("name", hostHolder.getUser().getName());
         info.put("id", hostHolder.getUser().getId());
         info.put("count", followService.getFollowerCount(EntityType.ENTITY_QUESTION, questionId));
-        return QuesZoneUtil.getJSONString(ret ? 0 : 1, info.toString());
+        return QuesZoneUtil.getJSONString(ret ? 0 : 1, info);
     }
 
-    @RequestMapping(path = {"/unfollowQuestion"}, method = {RequestMethod.POST, RequestMethod.GET})
+    @RequestMapping(path = {"/unfollowQuestion"}, method = {RequestMethod.POST})
     @ResponseBody
     public String unfollowQuestion(@RequestParam("questionId") int questionId) {
         if (null == hostHolder.getUser()) {
@@ -106,7 +114,7 @@ public class FollowController {
         info.put("id", hostHolder.getUser().getId());
         info.put("count", followService.getFollowerCount(EntityType.ENTITY_QUESTION, questionId));
 
-        return QuesZoneUtil.getJSONString(ret ? 0 : 1, info.toString());
+        return QuesZoneUtil.getJSONString(ret ? 0 : 1, info);
     }
 
     @RequestMapping(path = {"/user/{uid}/followees"}, method = RequestMethod.GET)

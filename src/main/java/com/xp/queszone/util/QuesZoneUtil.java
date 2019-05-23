@@ -5,13 +5,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.MessageDigest;
+import java.util.Map;
 
 public class QuesZoneUtil {
 
     private static final Logger logger = LoggerFactory.getLogger(QuesZoneUtil.class);
 
     public static int ANONYMOUS_USERID = 3;
-    public static int SYSTEM = 4;
+    public static int SYSTEM = 0;
 
     public static String MD5(String key) {
         char hexDigits[] = {
@@ -52,5 +53,14 @@ public class QuesZoneUtil {
         jsonObject.put("code",code);
         jsonObject.put("msg",msg);
         return jsonObject.toJSONString();
+    }
+
+    public static String getJSONString(int code, Map<String, Object> map) {
+        JSONObject json = new JSONObject();
+        json.put("code", code);
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            json.put(entry.getKey(), entry.getValue());
+        }
+        return json.toJSONString();
     }
 }

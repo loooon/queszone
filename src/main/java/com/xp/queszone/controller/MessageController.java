@@ -61,6 +61,7 @@ public class MessageController {
     public String getConversationList(Model model, @RequestParam("conversationId") String conversationId) {
         try {
             List<Message> messageList = messageService.getConversationDetail(conversationId,0,10);
+            messageService.updateMessageStatus(conversationId);
             List<ViewObject> messages = new ArrayList<>();
             for (Message message : messageList) {
                 ViewObject vo = new ViewObject();

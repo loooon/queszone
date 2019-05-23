@@ -31,4 +31,7 @@ public interface MessageDao {
 
     @Select({"SELECT COUNT(id) FROM", TABLE_NAME, "WHERE has_read=0 AND to_id = #{userId} AND conversation_id = #{conversationId}"})
     int getConvesationUnreadCount(@Param("userId") int userId, @Param("conversationId") String conversationId);
+
+    @Update({"UPDATE",TABLE_NAME,"SET has_read = 1 WHERE conversation_id = #{conversationId}"})
+    int updateMessageStatus(String conversationId);
 }

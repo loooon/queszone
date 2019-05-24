@@ -1,14 +1,8 @@
 #parse("header.html")
 <link rel="stylesheet" href="../styles/index.css">
-<link rel="stylesheet" href="../styles/detail.css">
     <div class="zg-wrap zu-main clearfix " role="main">
         <div class="zm-profile-section-wrap zm-profile-followee-page">
-            <!--
-                <div class="zm-profile-section-head">
-                    <span class="zm-profile-section-name">
-                        <a href="#">${profileUser.user.name}</a> 关注了 ${profileUser.followerCount} 人
-                    </span>
-                </div>-->
+
                 <div class="zm-profile-section-list">
                     <div id="zh-profile-follows-list">
                         <div class="zh-general-list clearfix">
@@ -28,15 +22,13 @@
                                 <div class="zm-list-content-medium">
                                     <h2 class="zm-list-content-title"><a data-tip="p$t$buaabarty" href="/user/${profileUser.user.id}" class="zg-link">${profileUser.user.name}</a></h2>
 
-                                    <!-- <div class="zg-big-gray">计蒜客教研首席打杂</div> -->
                                     <div class="details zg-gray">
                                         <a target="_blank" href="/user/${profileUser.user.id}/followers" class="zg-link-gray-normal">${profileUser.followerCount}粉丝</a>
                                         /
                                         <a target="_blank" href="/user/${profileUser.user.id}/followees" class="zg-link-gray-normal">${profileUser.followeeCount}关注</a>
                                         /
                                         <a target="_blank" href="#" class="zg-link-gray-normal">${profileUser.commentCount} 回答</a>
-                                        <!--/-->
-                                        <!--<a target="_blank" href="#" class="zg-link-gray-normal">548 赞同</a>-->
+
                                     </div>
                                 </div>
                             </div>
@@ -92,8 +84,6 @@
                                         <div class="feed-meta">
                                             <div class="zm-item-meta answer-actions clearfix js-contentActions">
                                                 <div class="zm-meta-panel">
-                                                    <a data-follow="q:link" class="follow-link zg-follow meta-item" href="javascript:;" id="sfb-123114">
-                                                        <i class="z-icon-follow"></i>关注问题</a>
                                                     <a href="#" name="addcomment" class="meta-item toggle-comment js-toggleCommentBox">
                                                         <i class="z-icon-comment"></i>${vo.question.commentCount} 条评论</a>
 
